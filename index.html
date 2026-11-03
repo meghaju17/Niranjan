@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>For You ❤️</title>
+  <meta name="theme-color" content="#cdbfe3" />
+
+  <!-- Fonts (the site still looks lovely with the fallbacks if you're offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;1,500&family=Great+Vibes&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="locked">
+
+  <!-- Atmosphere -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <canvas id="fx" aria-hidden="true"></canvas>
+
+  <!-- Music control (appears after the website is opened) -->
+  <button id="musicBtn" class="music-btn hidden" type="button" aria-label="Mute music" aria-pressed="false">
+    <svg class="ico-on" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+    </svg>
+    <svg class="ico-off" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m16 9 5 6"/><path d="m21 9-5 6"/>
+    </svg>
+  </button>
+
+  <!-- 1. OPENING SCREEN -->
+  <section id="intro" class="intro">
+    <div class="intro-inner">
+      <p class="eyebrow" id="introFor"></p>
+      <h1 class="script intro-title" id="introTitle"></h1>
+      <p class="intro-sub" id="introSub"></p>
+      <button id="openBtn" class="btn-primary" type="button"></button>
+      <p class="intro-hint" id="introHint"></p>
+    </div>
+  </section>
+
+  <main id="main" class="main hidden">
+
+    <!-- 2. THE APOLOGY -->
+    <section id="apology" class="section">
+      <p class="eyebrow reveal" id="apologyEyebrow"></p>
+      <h2 class="script section-title reveal" id="apologyTitle"></h2>
+      <div class="glass wide reveal">
+        <div class="type-box hand" id="apologyText"></div>
+        <button class="skip-btn" id="apologySkip" type="button">show it all ↷</button>
+      </div>
+      <a class="scroll-cue" href="#cards" aria-label="Continue">⌄</a>
+    </section>
+
+    <!-- 3. THINGS I WISH I COULD TELL YOU -->
+    <section id="cards" class="section">
+      <p class="eyebrow reveal" id="cardsEyebrow"></p>
+      <h2 class="script section-title reveal" id="cardsTitle"></h2>
+      <p class="section-sub reveal" id="cardsSub"></p>
+      <div class="card-grid" id="cardGrid"></div>
+      <a class="scroll-cue" href="#letter" aria-label="Continue">⌄</a>
+    </section>
+
+    <!-- 4. A LITTLE LOVE LETTER -->
+    <section id="letter" class="section">
+      <p class="eyebrow reveal" id="letterEyebrow"></p>
+      <h2 class="script section-title reveal" id="letterTitle"></h2>
+      <div class="paper reveal">
+        <div class="seal" aria-hidden="true">♥</div>
+        <div class="type-box hand" id="letterText"></div>
+        <button class="skip-btn" id="letterSkip" type="button">show it all ↷</button>
+      </div>
+      <a class="scroll-cue" href="#memories" aria-label="Continue">⌄</a>
+    </section>
+
+    <!-- OPTIONAL: OUR MEMORIES (only shown if you add memories in js/config.js) -->
+    <section id="memories" class="section hidden">
+      <p class="eyebrow reveal" id="memEyebrow"></p>
+      <h2 class="script section-title reveal" id="memTitle"></h2>
+      <p class="section-sub reveal" id="memSub"></p>
+      <div class="mem-list" id="memList"></div>
+      <a class="scroll-cue" href="#reasons" aria-label="Continue">⌄</a>
+    </section>
+
+    <!-- 5. REASONS I LOVE YOU -->
+    <section id="reasons" class="section">
+      <p class="eyebrow reveal" id="reasonsEyebrow"></p>
+      <h2 class="script section-title reveal" id="reasonsTitle"></h2>
+      <p class="section-sub reveal" id="reasonsSub"></p>
+
+      <div class="carousel reveal" id="carousel" aria-roledescription="carousel" aria-label="Reasons I love you">
+        <div class="carousel-viewport" id="carouselViewport">
+          <div class="carousel-track" id="carouselTrack"></div>
+        </div>
+        <div class="carousel-controls">
+          <button class="heart-btn" id="prevBtn" type="button" aria-label="Previous reason">
+            <svg viewBox="0 0 32 29" aria-hidden="true"><path d="M23.6 0c-3.4 0-5.7 2.1-7.6 4.5C14.1 2.1 11.8 0 8.4 0 3.8 0 0 3.7 0 8.3c0 9.1 16 20.7 16 20.7s16-11.6 16-20.7C32 3.7 28.2 0 23.6 0z"/></svg>
+            <span>‹</span>
+          </button>
+          <div class="dots" id="dots" role="tablist" aria-label="Choose a reason"></div>
+          <button class="heart-btn" id="nextBtn" type="button" aria-label="Next reason">
+            <svg viewBox="0 0 32 29" aria-hidden="true"><path d="M23.6 0c-3.4 0-5.7 2.1-7.6 4.5C14.1 2.1 11.8 0 8.4 0 3.8 0 0 3.7 0 8.3c0 9.1 16 20.7 16 20.7s16-11.6 16-20.7C32 3.7 28.2 0 23.6 0z"/></svg>
+            <span>›</span>
+          </button>
+        </div>
+        <p class="counter" id="counter" aria-live="polite"></p>
+      </div>
+      <a class="scroll-cue" href="#finale" aria-label="Continue">⌄</a>
+    </section>
+
+    <!-- 6 + 7. FINAL MESSAGE & HUG -->
+    <section id="finale" class="finale">
+      <div class="glow-layer" id="glowLayer" aria-hidden="true"></div>
+      <div class="finale-inner" id="finaleSeq">
+        <p class="f-item f-lead" data-delay="0" id="fLead"></p>
+        <p class="f-item f-big script" data-delay="1800" id="fImportant"></p>
+        <div class="f-trio">
+          <p class="f-item" data-delay="3800" id="fTrio1"></p>
+          <p class="f-item" data-delay="5000" id="fTrio2"></p>
+          <p class="f-item" data-delay="6200" id="fTrio3"></p>
+        </div>
+        <p class="f-item f-sorry" data-delay="8000" id="fSorry"></p>
+        <p class="f-item f-love script" data-delay="10800" id="fLove"></p>
+
+        <div class="hug">
+          <p class="f-item f-hug-prompt" data-delay="13800" id="hugPrompt"></p>
+          <button class="f-item btn-primary btn-hug" data-delay="15000" id="hugBtn" type="button"></button>
+          <p class="hug-msg script" id="hugMsg" aria-live="polite"></p>
+          <p class="f-item f-note" data-delay="16200" id="fNote"></p>
+        </div>
+      </div>
+      <footer class="footer" id="footer"></footer>
+    </section>
+  </main>
+
+  <script src="js/config.js"></script>
+  <script src="js/music.js"></script>
+  <script src="js/script.js"></script>
+</body>
+</html>
